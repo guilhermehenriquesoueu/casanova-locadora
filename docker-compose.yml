@@ -1,0 +1,27 @@
+version: '3'
+services:
+  db:
+    container_name: postgresdb
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: toor
+    ports:
+      - 5432:5432
+  website:
+    container_name: website
+    build:
+      context: ./web
+    ports:
+      - '80:80'
+
+  api:
+    container_name: api
+    build:
+      context: ./api
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    network_mode: host

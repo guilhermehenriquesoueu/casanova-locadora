@@ -1,0 +1,30 @@
+.navbar {
+  min-height: 80px;
+  background-color: transparent;
+  .navbar-end {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .button {
+      background-color: transparent;
+      transition: 1s;
+      cursor: pointer;
+      &:hover {
+        background-color: #000478;
+        color: #ffffff;
+        transition: 1s;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .navbar {
+    .navbar-menu {
+      .navbar-end {
+        flex-direction: row !important;
+      }
+    }
+  }
+}
