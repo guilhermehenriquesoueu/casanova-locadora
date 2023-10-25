@@ -1,7 +1,15 @@
 import { createContext, useContext, useState } from 'react'
 import { scroller } from 'react-scroll'
 
-const MyContext = createContext({})
+interface MyContextType {
+  scrollToElement: () => void
+  getProperties: (filters: any) => Promise<void>
+  properties: any[]
+  openModal: (id: string) => void
+  closeModal: (id: string) => void
+}
+
+const MyContext = createContext<MyContextType>(undefined)
 
 export function useMyContext() {
   return useContext(MyContext)
