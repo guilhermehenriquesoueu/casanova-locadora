@@ -17,8 +17,11 @@ import { PropertyTypes } from '../../types/PropertyTypes'
 import Button from '../button/Button'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import { Carousel } from 'react-responsive-carousel'
+import { useMyContext } from '../../context/ContextApi'
 
 export default function Card({ properties }: { properties: PropertyTypes }) {
+  const { openModal, closeModal } = useMyContext()
+
   function formatPrice(number: number | undefined) {
     if (typeof number !== 'number') {
       return 'Preço inválido'
@@ -32,16 +35,6 @@ export default function Card({ properties }: { properties: PropertyTypes }) {
     })
 
     return price
-  }
-
-  function openModal() {
-    const modal = document.querySelector(`#modal-${properties._id}`)
-    modal?.classList.add('is-active')
-  }
-
-  function closeModal() {
-    const modal = document.querySelector(`#modal-${properties._id}`)
-    modal?.classList.remove('is-active')
   }
 
   return (
@@ -89,7 +82,7 @@ export default function Card({ properties }: { properties: PropertyTypes }) {
           text='Mais Detalhes'
           width='150px'
           height='50px'
-          onClick={{ f: openModal, p: {} }}
+          onClick={{ myFunction: openModal, parameters: properties._id }}
         />
       </div>
 
@@ -100,7 +93,7 @@ export default function Card({ properties }: { properties: PropertyTypes }) {
         <p>{properties._price}</p>
         <div
           className='modal-background'
-          onClick={closeModal}
+          onClick={() => closeModal(properties._id)}
         ></div>
 
         <div className='modal-content'>
@@ -205,7 +198,7 @@ export default function Card({ properties }: { properties: PropertyTypes }) {
         <button
           className='modal-close is-large'
           aria-label='close'
-          onClick={closeModal}
+          onClick={() => closeModal(properties._id)}
         ></button>
       </div>
     </>

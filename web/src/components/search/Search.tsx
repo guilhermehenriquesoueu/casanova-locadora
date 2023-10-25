@@ -2,8 +2,12 @@ import './Search.css'
 import { SetStateAction, useState } from 'react'
 import Button from '../button/Button.tsx'
 import { FilterOptions } from '../../types/FilterOptions.ts'
+import CardContainer from '../card-container/CardContainer.tsx'
+import { useMyContext } from '../../context/ContextApi.tsx'
 
-export default function Search({ propFunctions }) {
+export default function Search() {
+  const { getProperties } = useMyContext()
+
   const [destinacao, setDestinacao] = useState('')
   const [tipoImovel, setTipoImovel] = useState('')
   const [cidade, setCidade] = useState('')
@@ -102,7 +106,7 @@ export default function Search({ propFunctions }) {
       filterOptions.rooms = parseInt(salas)
     }
 
-    propFunctions.getProperties(filterOptions)
+    getProperties(filterOptions)
   }
 
   const cleanOptions = () => {
@@ -260,8 +264,9 @@ export default function Search({ propFunctions }) {
               fontSize='1rem'
               height='4rem'
               width='10rem'
-              onClick={{ f: cleanOptions, p: {} }}
+              onClick={{ myFunction: cleanOptions, parameters: '' }}
             />
+
             <Button
               type='submit'
               text='Buscar'
@@ -272,6 +277,7 @@ export default function Search({ propFunctions }) {
           </span>
         </section>
       </form>
+      <CardContainer />
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './Button.css'
 
 type ButtonProps = {
@@ -7,17 +8,10 @@ type ButtonProps = {
   fontSize?: string
   backgroundColor?: string
   color?: string
-  border?: string
-  borderRadius?: string
-  margin?: string
   width?: string
   height?: string
-  transition?: string
-  cursor?: string
-  hoverBackgroundColor?: string
-  hoverColor?: string
-  hoverTransition?: string
-  onClick?: { f: (event: any) => void; p: object }
+  href?: string
+  onClick?: { myFunction: (parameters: unknown) => void; parameters: unknown }
 }
 
 export default function Button({
@@ -29,10 +23,12 @@ export default function Button({
   color,
   width = '150px',
   height = '50px',
-  onClick
+  onClick,
+  href
 }: ButtonProps) {
-  return (
-    <>
+  // Renderiza o botão diretamente se href não estiver definido
+  if (!href) {
+    return (
       <button
         style={{
           width: `${width}`,
@@ -42,7 +38,9 @@ export default function Button({
           color: `${color}`
         }}
         type={type}
-        onClick={() => onClick?.f(onClick?.p)}
+        onClick={
+          onClick ? () => onClick.myFunction(onClick.parameters) : undefined
+        }
       >
         <span
           style={{
@@ -55,6 +53,36 @@ export default function Button({
           {text}
         </span>
       </button>
-    </>
+    )
+  }
+
+  // Caso contrário, renderiza o botão envolto em um Link
+  return (
+    <Link to={href}>
+      <button
+        style={{
+          width: `${width}`,
+          height: `${height}`,
+          fontSize: `${fontSize}`,
+          backgroundColor: `${backgroundColor}`,
+          color: `${color}`
+        }}
+        type={type}
+        onClick={
+          onClick ? () => onClick.myFunction(onClick.parameters) : undefined
+        }
+      >
+        <span
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          {icon}
+          {text}
+        </span>
+      </button>
+    </Link>
   )
 }

@@ -1,8 +1,11 @@
 import { useState } from 'react'
 import './Navbar.css'
 import logo from '../../images/logo.jpg'
+import { Link } from 'react-router-dom'
+import { useMyContext } from '../../context/ContextApi'
 
 export default function NavBar() {
+  const { scrollToElement } = useMyContext()
   const [isActive, setIsActive] = useState(false)
 
   const toggleMenu = () => {
@@ -37,10 +40,28 @@ export default function NavBar() {
 
       <div className={`navbar-menu ${isActive ? 'is-active' : ''}`}>
         <div className='navbar-end'>
-          <a className='button is-white mx-6'>fale conosco</a>
-          <a className='button is-white mx-6'>blog</a>
+          <Link
+            to={'/contact'}
+            onClick={scrollToElement}
+            className='button is-white mx-6'
+          >
+            fale conosco
+          </Link>
+          <Link
+            to={'/blog'}
+            onClick={scrollToElement}
+            className='button is-white mx-6'
+          >
+            blog
+          </Link>
           <a className='button is-white mx-6'>boleto bancário</a>
-          <a className='button is-white mx-6'>área restrita</a>
+          <Link
+            to='/app'
+            onClick={scrollToElement}
+            className='button is-white mx-6'
+          >
+            área restrita
+          </Link>
         </div>
       </div>
     </nav>

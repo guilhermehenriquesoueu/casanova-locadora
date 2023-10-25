@@ -1,8 +1,11 @@
 import Button from '../button/Button'
 import './Header.css'
 import image from '../../images/background-header.jpg'
+import { useMyContext } from '../../context/ContextApi'
 
-export default function Header({ propFunctions }) {
+export default function Header() {
+  const { getProperties } = useMyContext()
+
   return (
     <header
       style={{
@@ -19,9 +22,10 @@ export default function Header({ propFunctions }) {
             height='50px'
             fontSize='20px'
             onClick={{
-              f: propFunctions.getProperties,
-              p: { buy_or_rent: 'rent' }
+              myFunction: getProperties,
+              parameters: { buy_or_rent: 'rent' }
             }}
+            href='/search'
           />
           <Button
             text='comprar'
@@ -29,9 +33,10 @@ export default function Header({ propFunctions }) {
             height='50px'
             fontSize='20px'
             onClick={{
-              f: propFunctions.getProperties,
-              p: { buy_or_rent: 'buy' }
+              myFunction: getProperties,
+              parameters: { buy_or_rent: 'buy' }
             }}
+            href='/search'
           />
         </div>
       </section>
