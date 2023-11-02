@@ -1,8 +1,8 @@
 import { v4 as uuid } from 'uuid'
-import PropertyEntity from '../../../../domain/entity/property.entity'
-import IPropertyRepository from '../../../../domain/repository/IPropertyRepository'
-import PropertyModel from '../config/PropertyModel'
-import { PropertyTypes } from '../../../../domain/types/PropertyTypes'
+import PropertyEntity from '../../../../domain/property/entity/property.entity'
+import IPropertyRepository from '../../../../domain/property/repository/IPropertyRepository'
+import PropertyModel from '../../../property/sequelize/config/PropertyModel'
+import { PropertyTypes } from '../../../../@shared/types/PropertyTypes'
 
 export default class PropertyRepository implements IPropertyRepository {
   async create(entity: PropertyEntity): Promise<void> {

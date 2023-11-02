@@ -1,7 +1,7 @@
 import express from 'express'
 import router from './routes'
 import cors from 'cors'
-import postgresDb from '../../../db/sequelize/config/sequelize'
+import postgresDb from '../../../property/sequelize/config/sequelize'
 import path from 'path'
 
 postgresDb()

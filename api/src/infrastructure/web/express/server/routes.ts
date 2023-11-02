@@ -1,9 +1,9 @@
 import { Router, Request, Response } from 'express'
 import multer from 'multer'
-import PropertyRepository from '../../../db/sequelize/repository/PropertyRepository'
-import PropertyEntity from '../../../../domain/entity/property.entity'
+import PropertyEntity from '../../../../domain/property/entity/property.entity'
 import path from 'path'
 import { v4 as uuid } from 'uuid'
+import PropertyRepository from '../../../property/sequelize/repository/PropertyRepository'
 
 const storage = multer.diskStorage({
   destination: path.join(__dirname, '../server/uploads'),
