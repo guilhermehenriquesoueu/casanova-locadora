@@ -1,4 +1,4 @@
-import { PropertyTypes } from '../../../@shared/types/PropertyTypes'
+import { PropertyTypes } from './types/PropertyTypes'
 
 export default interface IRepository<T> {
   create(entity: T): Promise<void>
